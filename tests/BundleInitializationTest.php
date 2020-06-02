@@ -5,6 +5,7 @@ namespace Kikwik\ApiAdminBundle\Tests;
 
 use Kikwik\ApiAdminBundle\Controller\DashboardController;
 use Kikwik\ApiAdminBundle\KikwikApiAdminBundle;
+use Kikwik\ApiAdminBundle\Service\EndpointParser;
 use Nyholm\BundleTest\BaseBundleTestCase;
 
 class BundleInitializationTest extends BaseBundleTestCase
@@ -30,7 +31,8 @@ class BundleInitializationTest extends BaseBundleTestCase
 
         // Test if you services exists
         $services = [
-            'kikwik_api_admin.controller.dashboard_controller' => DashboardController::class,
+            'kikwik_api_admin.controller.dashboard_controller'  => DashboardController::class,
+            'kikwik_api_admin.service.endpoint_parser'          => EndpointParser::class,
         ];
         foreach($services as $serviceId => $serviceClass)
         {

@@ -2,23 +2,27 @@
 
 namespace Kikwik\ApiAdminBundle\Controller;
 
+use Kikwik\ApiAdminBundle\Service\EndpointParser;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class DashboardController
+class DashboardController extends AbstractController
 {
     /**
-     * @var string
+     * @var \Kikwik\ApiAdminBundle\Service\EndpointParser
      */
-    private $apiEndpoint;
+    private $endpointParser;
 
-    public function __construct(string $apiEndpoint)
+    public function __construct(EndpointParser $endpointParser)
     {
-        $this->apiEndpoint = $apiEndpoint;
+        $this->endpointParser = $endpointParser;
     }
 
 
     public function index()
     {
-        return new Response($this->apiEndpoint);
+        return $this->render('@KikwikApiAdmin/dashboard.html.twig', [
+            'endpointParser' => $this->endpointParser
+        ]);
     }
 }

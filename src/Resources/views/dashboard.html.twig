@@ -1,0 +1,20 @@
+{% extends '@KikwikApiAdmin/layout.html.twig' %}
+
+{% block title %}{{ endpointParser.title }}{% endblock %}
+
+{% block body %}
+
+    <ul>
+        {% for resource in endpointParser.resources %}
+            <li>{{ resource.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for entrypoint in endpointParser.entryPoints %}
+            <li><a href="{{ entrypoint.link }}">{{ entrypoint.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {{ dump(endpointParser.metadata) }}
+{% endblock %}
