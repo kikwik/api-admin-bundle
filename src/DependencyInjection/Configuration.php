@@ -9,8 +9,16 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('kikwik_api_admin');
-        $rootNode = $treeBuilder->getRootNode();
+        if (in_array('getRootNode', get_class_methods(TreeBuilder::class)))
+        {
+            $treeBuilder = new TreeBuilder('kikwik_api_admin');
+            $rootNode = $treeBuilder->getRootNode();
+        }
+        else
+        {
+            $treeBuilder = new TreeBuilder();
+            $rootNode = $treeBuilder->root('kikwik_api_admin');
+        }
 
         $rootNode
             ->children()
