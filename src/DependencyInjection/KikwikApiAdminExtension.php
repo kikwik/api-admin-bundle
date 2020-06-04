@@ -19,7 +19,7 @@ class KikwikApiAdminExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $endpointParser = $container->getDefinition('kikwik_api_admin.service.endpoint_parser');
+        $endpointParser = $container->getDefinition('kikwik_api_admin.service.endpoint_pool');
         $endpointParser->setArgument(0, $config['api_endpoint']);
 
     }

@@ -5,13 +5,18 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
   <services>
 
-    <!-- EndpointParser -->
-    <service id="kikwik_api_admin.service.endpoint_parser" class="Kikwik\ApiAdminBundle\Service\EndpointParser" public="true">
+    <!-- EndpointPool -->
+    <service id="kikwik_api_admin.service.endpoint_pool" class="Kikwik\ApiAdminBundle\Service\EndpointPool" public="true">
     </service>
 
     <!-- DashboardController -->
     <service id="kikwik_api_admin.controller.dashboard_controller" class="Kikwik\ApiAdminBundle\Controller\DashboardController" public="true">
-      <argument type="service" id="kikwik_api_admin.service.endpoint_parser"/>
+      <argument type="service" id="kikwik_api_admin.service.endpoint_pool"/>
+    </service>
+
+    <!-- CrudController -->
+    <service id="kikwik_api_admin.controller.crud_controller" class="Kikwik\ApiAdminBundle\Controller\CrudController" public="true">
+      <argument type="service" id="kikwik_api_admin.service.endpoint_pool"/>
     </service>
 
 

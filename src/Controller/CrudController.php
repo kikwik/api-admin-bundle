@@ -1,13 +1,13 @@
 <?php
 
+
 namespace Kikwik\ApiAdminBundle\Controller;
+
 
 use Kikwik\ApiAdminBundle\Service\EndpointPool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
-
-class DashboardController extends AbstractController
+class CrudController extends AbstractController
 {
     /**
      * @var \Kikwik\ApiAdminBundle\Service\EndpointPool
@@ -19,11 +19,13 @@ class DashboardController extends AbstractController
         $this->endpointPool = $endpointPool;
     }
 
-
-    public function index()
+    public function list(string $resource)
     {
-        return $this->render('@KikwikApiAdmin/dashboard.html.twig', [
-            'endpointPool' => $this->endpointPool
+        $resourceUri = urldecode($resource);
+        $collection = $this->endpointPool->getCollection($resourceUri);
+
+        return $this->render('@KikwikApiAdmin/crud/list.html.twig', [
+            'collection' => $collection
         ]);
     }
 }

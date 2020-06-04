@@ -4,11 +4,8 @@
         xsi:schemaLocation="http://symfony.com/schema/routing
         https://symfony.com/schema/routing/routing-1.0.xsd">
 
-  <route
-      id="kikwik_api_admin_dashboard"
-      path="/"
-      controller="kikwik_api_admin.controller.dashboard_controller:index"
-      methods="GET"
-  />
+  <route id="kikwik_api_admin_dashboard" path="/" controller="kikwik_api_admin.controller.dashboard_controller:index" methods="GET"/>
+
+  <route id="kikwik_api_admin_list"  path="/{resource}" controller="kikwik_api_admin.controller.crud_controller:list" methods="GET,POST"/>
 
 </routes>

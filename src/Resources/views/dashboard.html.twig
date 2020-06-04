@@ -1,20 +1,16 @@
 {% extends '@KikwikApiAdmin/layout.html.twig' %}
 
-{% block title %}{{ endpointParser.title }}{% endblock %}
+{% block title %}{{ endpointPool.apiDocumentation.title }} Admin{% endblock %}
 
 {% block body %}
 
+
     <ul>
-        {% for resource in endpointParser.resources %}
-            <li>{{ resource.title }}</li>
+        {% for entrypoint in endpointPool.entryPoint.links %}
+            <li><a href="{{ path('kikwik_api_admin_list',{'resource':entrypoint.link|url_encode}) }}">{{ entrypoint.resourceName }}</a></li>
         {% endfor %}
     </ul>
 
-    <ul>
-        {% for entrypoint in endpointParser.entryPoints %}
-            <li><a href="{{ entrypoint.link }}">{{ entrypoint.title }}</a></li>
-        {% endfor %}
-    </ul>
 
-    {{ dump(endpointParser.metadata) }}
+    {{ endpointPool.debug }}
 {% endblock %}
