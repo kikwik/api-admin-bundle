@@ -26,4 +26,11 @@ class DashboardController extends AbstractController
             'endpointPool' => $this->endpointPool
         ]);
     }
+
+    public function sideMenu()
+    {
+        return $this->render('@KikwikApiAdmin/_sideMenu.html.twig', [
+            'endpointPool' => $this->endpointPool
+        ]);
+    }
 }

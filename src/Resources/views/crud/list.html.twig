@@ -1,9 +1,41 @@
 {% extends '@KikwikApiAdmin/layout.html.twig' %}
 
-{% block title %}list Admin{% endblock %}
+{% block title %}list - {{ endpointPool.apiDocumentation.title }} Admin{% endblock %}
 
 {% block body %}
 
+    {{ collection.totalItems }} elements
+
+    {% if collection.members|length %}
+        <table>
+            <thead>
+                <tr>
+                    {% for field in collection.fields %}
+                        <th>{{ field }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for member in collection.members %}
+                <tr>
+                    {% for field, value in member.values %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if collection.firstPage %}<a href="{{ path('kikwik_api_admin_list',{'resource':collection.firstPage|url_encode}) }}">first</a>{% endif %}
+        {% if collection.previousPage %}<a href="{{ path('kikwik_api_admin_list',{'resource':collection.previousPage|url_encode}) }}">previous</a>{% endif %}
+        {% if collection.nextPage %}<a href="{{ path('kikwik_api_admin_list',{'resource':collection.nextPage|url_encode}) }}">next</a>{% endif %}
+        {% if collection.lastPage %}<a href="{{ path('kikwik_api_admin_list',{'resource':collection.lastPage|url_encode}) }}">last</a>{% endif %}
+    {% else %}
+        no results
+    {% endif %}
+
     {{ dump(collection) }}
 
+
+    {{ endpointPool.debug }}
 {% endblock %}

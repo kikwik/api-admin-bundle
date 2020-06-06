@@ -1,0 +1,6 @@
+<ul>
+    <li><a href="{{ path('kikwik_api_admin_dashboard') }}">Home</a></li>
+    {% for entrypoint in endpointPool.entryPoint.links %}
+        <li><a href="{{ path('kikwik_api_admin_list',{'resource':entrypoint.link|url_encode}) }}">{{ entrypoint.resourceName }}</a></li>
+    {% endfor %}
+</ul>

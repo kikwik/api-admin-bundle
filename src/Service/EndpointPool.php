@@ -68,12 +68,7 @@ class EndpointPool
             }
             else
             {
-                $this->jsonLds[$url] = [
-                    'error' => true,
-                    'stausCode' => $response->getStatusCode(),
-                    'headers' => $response->getHeaders(false),
-                    'response' => $response->getContent(false),
-                    ];
+                throw new \Exception('Error '.$response->getStatusCode().': '.$response->getContent(false));
             }
         }
         return $this->jsonLds[$url];
@@ -84,7 +79,10 @@ class EndpointPool
 
     public function debug()
     {
-        dump($this->apiEndpoint,$this->apiDomain,$this->jsonLds);
+        foreach($this->jsonLds as $jsonLd)
+        {
+            dump($jsonLd);
+        }
     }
 
 

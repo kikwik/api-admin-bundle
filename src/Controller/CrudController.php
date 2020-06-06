@@ -25,6 +25,7 @@ class CrudController extends AbstractController
         $collection = $this->endpointPool->getCollection($resourceUri);
 
         return $this->render('@KikwikApiAdmin/crud/list.html.twig', [
+            'endpointPool' => $this->endpointPool,
             'collection' => $collection
         ]);
     }
