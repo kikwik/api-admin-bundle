@@ -3,7 +3,6 @@
 namespace Kikwik\ApiAdminBundle\Hydra;
 
 
-use Kikwik\ApiAdminBundle\Service\EndpointPool;
 
 class Base
 {
@@ -12,21 +11,20 @@ class Base
      */
     protected $jsonld = [];
 
+    protected $context;
+
     public function __construct(array $jsonld)
     {
         $this->jsonld = $jsonld;
     }
 
-    public function getContext()
+    public function setContext(Context $context)
     {
-        return $this->jsonld['@context'];
+        $this->context = $context;
     }
 
-    public function getVocab()
+    public function getContext(): Context
     {
-        if(is_array($this->jsonld['@context']) && isset($this->jsonld['@context']['@vocab']))
-        {
-            return $this->jsonld['@context']['@vocab'];
-        }
+        return $this->context;
     }
 }

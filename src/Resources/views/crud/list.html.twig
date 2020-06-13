@@ -1,6 +1,6 @@
 {% extends '@KikwikApiAdmin/layout.html.twig' %}
 
-{% block title %}list - {{ endpointPool.apiDocumentation.title }} Admin{% endblock %}
+{% block title %}{{ collection.title }} Admin{% endblock %}
 
 {% block body %}
 
@@ -19,7 +19,7 @@
             {% for member in collection.members %}
                 <tr>
                     {% for field, value in member.values %}
-                        <td>{{ value }}</td>
+                        <td>{{ dump(value) }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}

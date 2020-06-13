@@ -7,27 +7,39 @@ use Kikwik\ApiAdminBundle\Hydra\Base;
 
 class Collection extends Base
 {
+    private $members;
+
+    public function __construct(array $jsonld)
+    {
+        parent::__construct($jsonld);
+
+        $this->members = [];
+        foreach($this->jsonld['hydra:member'] as $memberData)
+        {
+            $this->members[] = new Member($memberData);
+        }
+    }
+
     /**
      * @return \Kikwik\ApiAdminBundle\Hydra\Crud\Member[]
      */
     public function getMembers()
     {
-        $result = [];
-        foreach($this->jsonld['hydra:member'] as $memberData)
-        {
-            $result[] = new Member($memberData);
-        }
-        return $result;
+        return $this->members;
     }
 
     public function getFields()
     {
-        if(isset($this->jsonld['hydra:member'][0]))
+        if(isset($this->members[0]))
         {
-            $first = new Member($this->jsonld['hydra:member'][0]);
-            return $first->getFields();
+            return $this->members[0]->getFields();
         }
         return [];
+    }
+
+    public function getTitle()
+    {
+        return '...';
     }
 
     public function getTotalItems()
